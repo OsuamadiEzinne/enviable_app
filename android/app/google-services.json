@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "167556416758",
+    "firebase_url": "https://enviable-802b0-default-rtdb.firebaseio.com",
+    "project_id": "enviable-802b0",
+    "storage_bucket": "enviable-802b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167556416758:android:49bac6867564c05b1458d7",
+        "android_client_info": {
+          "package_name": "osuamadiezinne.enviable_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSZ_jizdi7pVvnIeEO5sfGQ5P26HFu99E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
