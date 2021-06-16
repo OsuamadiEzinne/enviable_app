@@ -67,7 +67,7 @@ class AdaptiveTextFormInput extends StatelessWidget {
         obscureText: obscureText,
         autocorrect: autoCorrect,
         initialValue: initial,
-        maxLength: maxLength,
+        // maxLength: maxLength,
         maxLengthEnforcement: maxLengthEnforced
             ? MaxLengthEnforcement.enforced
             : MaxLengthEnforcement.none,
@@ -91,6 +91,9 @@ class AdaptiveTextFormInput extends StatelessWidget {
               hintStyle: hintStyle,
             ),
         autofillHints: autoFillHints,
+        inputFormatters: [
+          if (maxLength != null) LengthLimitingTextInputFormatter(maxLength),
+        ],
         style: style,
         autovalidateMode:
             validate ? AutovalidateMode.always : AutovalidateMode.disabled,

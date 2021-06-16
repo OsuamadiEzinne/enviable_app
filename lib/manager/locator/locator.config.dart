@@ -11,9 +11,13 @@ import 'package:enviable_app/core/presentation/managers/network/network_cubit.da
 import 'package:enviable_app/features/auth/data/repositories/firebase_auth_impl.dart'
     as _i15;
 import 'package:enviable_app/features/auth/domain/index.dart' as _i14;
+import 'package:enviable_app/features/auth/presentation/managers/auth/auth_cubit.dart'
+    as _i17;
+import 'package:enviable_app/features/auth/presentation/managers/auth_watcher/auth_watcher_cubit.dart'
+    as _i16;
 import 'package:enviable_app/features/onborading/presentation/managers/onboarding/onboarding_cubit.dart'
     as _i12;
-import 'package:enviable_app/manager/locator/modules/modules.dart' as _i16;
+import 'package:enviable_app/manager/locator/modules/modules.dart' as _i18;
 import 'package:enviable_app/manager/theme/manager/theme_cubit.dart' as _i13;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i4;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
@@ -52,10 +56,13 @@ extension GetItInjectableX on _i1.GetIt {
         get<_i6.FirebaseAuth>(),
         get<_i9.GoogleSignIn>(),
         get<_i10.InternetConnectionChecker>()));
+    gh.factory<_i16.AuthWatcherCubit>(
+        () => _i16.AuthWatcherCubit(get<_i14.AuthFacade>()));
+    gh.factory<_i17.AuthCubit>(() => _i17.AuthCubit(get<_i14.AuthFacade>()));
     return this;
   }
 }
 
-class _$ServiceModules extends _i16.ServiceModules {}
+class _$ServiceModules extends _i18.ServiceModules {}
 
-class _$Modules extends _i16.Modules {}
+class _$Modules extends _i18.Modules {}

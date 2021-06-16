@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:enviable_app/_404.dart';
 import 'package:enviable_app/features/auth/presentation/index.dart';
+import 'package:enviable_app/features/home/presentation/screens/home_screen.dart';
 import 'package:enviable_app/features/onborading/presentation/index.dart';
 
 @AdaptiveAutoRouter(
@@ -44,6 +45,12 @@ import 'package:enviable_app/features/onborading/presentation/index.dart';
       page: ForgotPasswordScreen,
       maintainState: true,
       cupertinoPageTitle: 'Forgot Password',
+    ),
+    //////
+    AdaptiveRoute(
+      fullMatch: true,
+      page: HomeScreen,
+      maintainState: true,
     ),
     //
     AdaptiveRoute(

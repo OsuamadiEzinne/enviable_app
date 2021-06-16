@@ -17,7 +17,7 @@ abstract class BottomAlertDialog {
     ArgumentError.checkNotNull(message, 'message');
 
     final _bar = Flushbar(
-      duration: duration ?? const Duration(seconds: 15),
+      duration: duration ?? const Duration(seconds: 10),
       icon: Icon(
         icon ?? Icons.error,
         color: iconColor ?? Colors.red,

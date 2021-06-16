@@ -89,25 +89,25 @@ class AppTheme extends HiveObject {
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         isDense: true,
-        filled: true,
+        filled: false,
         hintStyle: TextStyle(color: Colors.grey),
         labelStyle: TextStyle(color: Colors.grey),
         errorStyle: TextStyle(color: AppColors.errorRed),
-        fillColor: AppColors.accentColor.shade200.withOpacity(0.8),
+        fillColor: Colors.transparent,
         contentPadding: EdgeInsets.symmetric(
-          vertical: 14.0,
-          horizontal: 12.0,
+          vertical: 3.0,
+          horizontal: 10.0,
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
         focusedErrorBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.errorRed, width: 2.0),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
         errorBorder: UnderlineInputBorder(
@@ -142,25 +142,25 @@ class AppTheme extends HiveObject {
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         isDense: true,
-        filled: true,
+        filled: false,
         hintStyle: TextStyle(color: Colors.grey),
         labelStyle: TextStyle(color: Colors.grey),
         errorStyle: TextStyle(color: AppColors.errorRed),
-        fillColor: AppColors.secondaryColor.shade500,
+        fillColor: Colors.transparent,
         contentPadding: EdgeInsets.symmetric(
-          vertical: 14.0,
-          horizontal: 12.0,
+          vertical: 3.0,
+          horizontal: 10.0,
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
         focusedErrorBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.errorRed, width: 2.0),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(Helpers.inputBorderRadius),
         ),
         errorBorder: UnderlineInputBorder(
@@ -195,7 +195,7 @@ class AppTheme extends HiveObject {
       bottomSheetTheme: _bottomSheetThemeData,
       bottomNavigationBarTheme: _bottomNavigationBarTheme,
       buttonTheme: _buttonThemeData,
-      textTheme: GoogleFonts.openSansTextTheme(_textTheme),
+      textTheme: GoogleFonts.poppinsTextTheme(_textTheme),
     );
   }
 

@@ -10,8 +10,8 @@ import 'package:meta/meta.dart';
 
 mixin FirebaseAuthMixin {
   Future<Either<AuthFailure, Unit>> signInWithCredentials({
-    required AuthCredential old,
-    required AuthCredential incoming,
+    required AuthCredential? old,
+    required AuthCredential? incoming,
   });
 
   @protected

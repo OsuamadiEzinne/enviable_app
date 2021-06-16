@@ -40,9 +40,9 @@ class Validator {
   static Either<FieldObjectException<String>, String?> usernameValidator(
     String? value,
   ) {
-    if (value != null) return left(FieldObjectException.empty());
+    if (value == null) return left(FieldObjectException.empty());
 
-    var clean = value!.trim();
+    var clean = value.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 
@@ -60,9 +60,9 @@ class Validator {
     String? email,
   ) {
     // Returns the string without any leading and trailing whitespace
-    if (email != null) return left(FieldObjectException.empty());
+    if (email == null) return left(FieldObjectException.empty());
 
-    var clean = email!.trim();
+    var clean = email.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 
@@ -76,9 +76,9 @@ class Validator {
     String? password, {
     FIELD_VALIDATION? validationMode = FIELD_VALIDATION.DEEP,
   }) {
-    if (password != null) return left(FieldObjectException.empty());
+    if (password == null) return left(FieldObjectException.empty());
 
-    var clean = password!.trim();
+    var clean = password.trim();
 
     var shortPassword = clean.length < MIN_PASSWORD_LENGTH;
     var containsUpperCase = RegExp('$upperCasePattern').hasMatch(clean);
@@ -115,9 +115,9 @@ class Validator {
     Country country, {
     FIELD_VALIDATION? mode = FIELD_VALIDATION.DEEP,
   }) {
-    if (phone != null) return left(FieldObjectException.empty());
+    if (phone == null) return left(FieldObjectException.empty());
 
-    var clean = phone!.trim();
+    var clean = phone.trim();
 
     var containsOnlyDigits =
         RegExp(r'^[0-9]+$', multiLine: true).hasMatch(clean);
@@ -136,8 +136,7 @@ class Validator {
               message:
                   'Required: ${country.digitsCount - clean.length} digits.'));
         if (!containsOnlyDigits)
-          return left(
-              FieldObjectException.invalid(message: INVALID_PHONE_NUMBER));
+          return left(FieldObjectException.invalid(message: INVALID_PHONE));
         break;
     }
 
@@ -148,23 +147,25 @@ class Validator {
     String? code, {
     int max = 6,
   }) {
-    if (code != null) return left(FieldObjectException.empty());
+    if (code == null) return left(FieldObjectException.empty());
 
-    var clean = code!.trim();
+    var clean = code.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 
     if (clean.length < max)
-      return left(FieldObjectException.invalid(message: INVALID_OTP_CODE));
+      return left(FieldObjectException.invalid(
+        message: '$INCOMPLETE_OTP_CODE ${clean.length} digits.',
+      ));
     return right(code);
   }
 
   static Either<FieldObjectException<String>, String?> multilineValidator(
     String? input,
   ) {
-    if (input != null) return left(FieldObjectException.empty());
+    if (input == null) return left(FieldObjectException.empty());
 
-    var clean = input!.trim();
+    var clean = input.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 
@@ -179,9 +180,9 @@ class Validator {
     bool useStandard = true,
   }) {
     if (input is String) {
-      if (input != null) return left(FieldObjectException.empty());
+      if (input == null) return left(FieldObjectException.empty());
 
-      var clean = input!.trim();
+      var clean = input.trim();
 
       if (clean.isEmpty) return left(FieldObjectException.empty());
 
@@ -207,9 +208,9 @@ class Validator {
     String? input, [
     int max = 500,
   ]) {
-    if (input != null) return left(FieldObjectException.empty());
+    if (input == null) return left(FieldObjectException.empty());
 
-    var clean = input!.trim();
+    var clean = input.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 
@@ -225,9 +226,9 @@ class Validator {
     String? input, [
     String message = INVALID_FIELD_MESSAGE,
   ]) {
-    if (input != null) return left(FieldObjectException.empty());
+    if (input == null) return left(FieldObjectException.empty());
 
-    var clean = input!.trim();
+    var clean = input.trim();
 
     if (clean.isEmpty) return left(FieldObjectException.empty());
 

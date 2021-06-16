@@ -23,10 +23,10 @@ class Country with _$Country {
     @Default(Country.DEFAULT_DIGITS_COUNT) int digitsCount,
   }) = _Country;
 
-  static const Country NG = Country(
+  static const Country DEFAULT = Country(
     codeName: 'NG',
     dialCode: '+234',
-    digitsCount: 11,
+    digitsCount: 10,
   );
 
   static List<Country> get list {
@@ -87,7 +87,7 @@ class Country with _$Country {
         dialCode: '+258',
         digitsCount: 8,
       ),
-      NG,
+      DEFAULT,
       Country(
         codeName: 'PT',
         language: 'Portugues',

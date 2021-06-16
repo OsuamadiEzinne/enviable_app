@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>167556416758-1er5glj17lcpfc5krvvo27mvsr5lavki.apps.googleusercontent.com</string>
+	<string>167556416758-qvof6u9uph19h4h7rfnsqn155m45peu8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.167556416758-1er5glj17lcpfc5krvvo27mvsr5lavki</string>
+	<string>com.googleusercontent.apps.167556416758-qvof6u9uph19h4h7rfnsqn155m45peu8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>167556416758-5bojjsfuorl9spj8ccqh5hhjdacqtl3o.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDUzAdHp11MNthCOHS7wPMFWYyP0w-REEA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>osuamadiezinne.enviableApp</string>
+	<string>osuamadiezinne.enviableApp.dev</string>
 	<key>PROJECT_ID</key>
 	<string>enviable-802b0</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:167556416758:ios:17626a8f8697115b1458d7</string>
+	<string>1:167556416758:ios:6a20ee9b9dee83d81458d7</string>
 	<key>DATABASE_URL</key>
 	<string>https://enviable-802b0-default-rtdb.firebaseio.com</string>
 </dict>

@@ -4,7 +4,7 @@ import 'package:enviable_app/core/domain/response/index.dart';
 import 'package:enviable_app/core/domain/validator/validator.dart';
 
 class OTPCode extends FieldObject<String?> {
-  static const CODE_LENGTH = 5;
+  static const CODE_LENGTH = 6;
 
   @override
   final Either<FieldObjectException<String>, String?> value;

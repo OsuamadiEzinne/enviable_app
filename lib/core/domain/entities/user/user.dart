@@ -36,7 +36,7 @@ class User with _$User {
         displayName: DisplayName('Guest User'),
         email: EmailAddress('name@email.com'),
         isEmailVerified: false,
-        phone: Phone('8100000002', Country.NG),
+        phone: Phone('8100000002', Country.DEFAULT),
         photo: AppAssets.user,
         createdAt: App.today,
       );
@@ -58,7 +58,7 @@ class User with _$User {
         email: EmailAddress('$email'),
         providers: mapProvidersToDomain(providers ?? []),
         isEmailVerified: isEmailVerified,
-        phone: Phone(phone ?? '', Country.NG),
+        phone: Phone(phone ?? '', Country.DEFAULT),
         photo: photoURL,
         createdAt: createdAt,
         lastSeenAt: lastSeenAt,

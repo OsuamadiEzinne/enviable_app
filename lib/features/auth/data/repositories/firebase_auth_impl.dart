@@ -78,31 +78,40 @@ class FirebaseAuthImpl implements AuthFacade {
   @override
   Future<Either<AuthFailure, Unit>> login({
     required Phone phone,
+    Duration timeout = const Duration(seconds: AuthFacade.TIMEOUT_SEC),
+    required void Function(PhoneAuthCredential credential)
+        verificationCompleted,
+    required void Function(AuthFailure failure) verificationFailed,
+    required void Function(String verificationId, [int? forceResendToken])
+        codeSent,
+    int? forceResendingToken,
+    required void Function(String verificationId) codeAutoRetrievalTimeout,
   }) async {
     try {
       // First we'll check for stable Internet connection
       await _checkForStableInternet();
 
       await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: '${phone.getOrEmpty}',
-        timeout: Duration(seconds: 120),
-        verificationCompleted: (AuthCredential credential) async {
-          // called only when the verification is successfully
-          // completed automatically using Auto Retrieval
-          // Call _auth.signInWithCredential()
+        phoneNumber: '${phone.country.dialCode}${phone.getOrEmpty}',
+        timeout: timeout,
+        // called only when the verification is successfully
+        // completed automatically using Auto Retrieval
+        // Call _auth.signInWithCredential()
+        verificationCompleted: verificationCompleted,
+        // Called when verification failed and the user is not logged in
+        verificationFailed: (FirebaseAuthException ex) async {
+          var parsed = await FirebaseAuthMixin.handleAuthException(ex);
+
+          parsed.fold(
+            (f) => verificationFailed.call(f),
+            (_) => null,
+          );
         },
-        verificationFailed: (FirebaseAuthException ex) {
-          // Called when verification failed and the user is not logged in
-          print('Exception CODE ===> ${ex.code}');
-          print('Exception received ===> ${ex.message}');
-        },
-        codeSent: (String verificationId, [int? forceResendToken]) {
-          // show dialog to manually receive input from user
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          print(verificationId);
-          print('Timout');
-        },
+        // show dialog to manually receive input from user
+        codeSent: codeSent,
+        // Force resend a new code using the token
+        forceResendingToken: forceResendingToken,
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       );
 
       return right(unit);
@@ -189,6 +198,33 @@ class FirebaseAuthImpl implements AuthFacade {
   }
 
   @override
+  Future<Either<AuthFailure, Unit>> confirmOTPCode({
+    required String code,
+    required String verificationId,
+  }) async {
+    try {
+      // Create a PhoneAuthCredential with the code
+      var credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: code,
+      );
+      // Sign user in with created credential
+      return await _firebaseSignInWithCredentials(credential);
+    } on AuthFailure catch (e) {
+      return left(e);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == WRONG_PASSWORD)
+        return left(AuthFailure.invalidCredentials(
+            message: 'Wrong or invalid password.'));
+      return FirebaseAuthMixin.handleAuthException(e);
+    } catch (e) {
+      return left(AuthFailure.unknownFailure(
+        message: (e is Exception || e is Error) ? '$e' : null,
+      ));
+    }
+  }
+
+  @override
   Future<Either<AuthFailure, Unit>> signInWithCredentials({
     required AuthCredential? old,
     required AuthCredential? incoming,
@@ -196,18 +232,29 @@ class FirebaseAuthImpl implements AuthFacade {
     try {
       // First we'll check for stable Internet connection
       await _checkForStableInternet();
-      if (old != null && incoming == null) {
+
+      log.wtf(old);
+
+      // This is for a normal Sign-in with credential
+      // Accept the old creds and attempt to sign the user in
+      if (old != null && incoming == null)
         return await _firebaseSignInWithCredentials(old);
+
+      if (old != null && incoming != null) {
+        final result = await _firebaseSignInWithCredentials(old);
+
+        return result.fold((_) => Future.value(left(_)), (_) async {
+          // Link creds to firebase provider after signInWithCredentials
+          await _firebaseAuth.currentUser?.linkWithCredential(incoming);
+
+          return Future.value(right(_));
+        });
       }
 
-      final result = await _firebaseSignInWithCredentials(old!);
-
-      return result.fold((_) => Future.value(left(_)), (_) async {
-        // Link with firebase provider
-        await _firebaseAuth.currentUser?.linkWithCredential(incoming!);
-
-        return Future.value(right(_));
-      });
+      throw AuthFailure.invalidCredentials(
+        message:
+            'Credentials are invalid. Please try again or contact support.',
+      );
     } on AuthFailure catch (e) {
       return left(e);
     } on FirebaseAuthException catch (e) {

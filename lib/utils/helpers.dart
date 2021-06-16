@@ -95,7 +95,7 @@ class Helpers {
   }
 
   static T? foldTheme<T>({
-    required T Function() light,
+    required T? Function() light,
     T? Function()? dark,
     BuildContext? context,
   }) {
@@ -159,8 +159,9 @@ class Helpers {
         ),
       );
 
-  Widget get circularLoadingOverlay => Container(
-        color: App.theme.primaryColor.withOpacity(0.65),
+  Widget circularLoadingOverlay([Color? bgColor]) => Container(
+        color: bgColor ?? App.theme.primaryColor.withOpacity(0.65),
+        padding: EdgeInsets.all(8.0),
         child: Center(
           child: CircularProgressBar.adaptive(
             width: width * 0.08,

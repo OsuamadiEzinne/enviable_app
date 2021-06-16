@@ -44,6 +44,6 @@ void main() async {
   }
 
   runApp(DevicePreview(
-    builder: (context) => const enviable_app(),
+    builder: (context) => const EnviableApp(),
   ));
 }

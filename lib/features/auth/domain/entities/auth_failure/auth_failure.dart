@@ -56,6 +56,11 @@ class AuthFailure with _$AuthFailure, Response {
         message: message ?? 'E-mail address already in use!',
       );
 
+  factory AuthFailure.invalidPhoneNumber({String? message}) => AuthFailure(
+        code: INVALID_PHONE_NUMBER,
+        message: message ?? 'The provided phone number is not valid.',
+      );
+
   factory AuthFailure.tooManyRequests({String? message}) => AuthFailure(
         code: TOO_MANY_REQUESTS,
         message: message ??

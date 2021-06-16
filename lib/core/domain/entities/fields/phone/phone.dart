@@ -5,7 +5,7 @@ import 'package:enviable_app/core/domain/response/index.dart';
 import 'package:enviable_app/core/domain/validator/validator.dart';
 
 class Phone extends FieldObject<String?> {
-  static const Phone DEFAULT = Phone._(Right(''), Country.NG);
+  static const Phone DEFAULT = Phone._(Right(''), Country.DEFAULT);
 
   @override
   final Either<FieldObjectException<String>, String?> value;

@@ -1,4 +1,5 @@
 import 'package:inflection3/inflection3.dart' as _l1;
+import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:intl/intl.dart';
 
 extension StringX on String {
@@ -146,6 +147,23 @@ extension StringX on String {
   }
 
   String removeNewLines() => replaceAll('\n', ' ');
+
+  String formatNumber({
+    int div = 4,
+    int? count,
+    String separator = ' ',
+  }) {
+    return '$this'.split('').toImmutableList().foldIndexed(
+      '',
+      (i, p, next) {
+        if (count != null && i >= count) return '$p$next';
+
+        if (i > 0 && i % div == 0) return '$p$separator$next';
+
+        return '$p$next';
+      },
+    );
+  }
 }
 
 enum Direction {

@@ -14,7 +14,11 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: SafeArea(
+        child: Container(
+          child: Text('This is login'),
+        ),
+      ),
     );
   }
 }

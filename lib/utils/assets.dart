@@ -76,4 +76,12 @@ mixin AppAssets {
     width: 22,
     fit: BoxFit.contain,
   );
+
+  static SvgPicture apple([Color? color]) => SvgPicture.asset(
+        '$AUTH_SVG_DIR/apple.svg',
+        height: 22,
+        width: 22,
+        color: color,
+        fit: BoxFit.contain,
+      );
 }

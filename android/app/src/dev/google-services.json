@@ -52,18 +52,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:167556416758:android:4493115959fa60401458d7",
+        "mobilesdk_app_id": "1:167556416758:android:53589931ec5bf5341458d7",
         "android_client_info": {
           "package_name": "osuamadiezinne.enviable_app.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "167556416758-ssnrb08rrj16gv9dfd15onhdhtu5mim5.apps.googleusercontent.com",
+          "client_id": "167556416758-s5hsf7ckmae2no28o4942he8l6ulrn2f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "osuamadiezinne.enviable_app.dev",
-            "certificate_hash": "0c4a0732b7ffc0427cd901653b261cf9c191c41c"
+            "certificate_hash": "303548ad6c7e682acb8954ec693bef9a1dcb6ebc"
           }
         },
         {

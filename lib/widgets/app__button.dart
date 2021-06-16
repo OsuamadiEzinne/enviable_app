@@ -188,12 +188,14 @@ class AppButton extends StatelessWidget {
       material: (context) => type.fold(
         flat: () => TextButton(
           key: key,
-          onPressed: onPressed,
+          onPressed: !disabled ? onPressed : null,
           autofocus: autofocus,
           clipBehavior: clipBehavior,
           onLongPress: onLongPress,
           style: TextButton.styleFrom(
-            backgroundColor: backgroundColor ?? AppColors.accentColor,
+            backgroundColor: disabled
+                ? (backgroundColor ?? AppColors.accentColor).withOpacity(0.4)
+                : backgroundColor ?? AppColors.accentColor,
             alignment: alignment,
             elevation: elevation,
             side: side,
@@ -230,12 +232,14 @@ class AppButton extends StatelessWidget {
         ),
         elevated: () => ElevatedButton(
           key: key,
-          onPressed: onPressed,
+          onPressed: !disabled ? onPressed : null,
           autofocus: autofocus,
           clipBehavior: clipBehavior,
           onLongPress: onLongPress,
           style: ElevatedButton.styleFrom(
-            primary: backgroundColor ?? AppColors.accentColor,
+            primary: disabled
+                ? (backgroundColor ?? AppColors.accentColor).withOpacity(0.4)
+                : backgroundColor ?? AppColors.accentColor,
             alignment: alignment,
             elevation: elevation,
             padding: padding,

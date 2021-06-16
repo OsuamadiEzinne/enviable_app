@@ -47,6 +47,10 @@ const String INVALID_CREDENTIAL = 'invalid-credential';
 /// too many request from a device within a certain range of time
 const String TOO_MANY_REQUESTS = 'too-many-requests';
 
+/// Thrown by Firebase server when
+/// provided phone number or verification code is invalid
+const String INVALID_PHONE_NUMBER = 'invalid-phone-number';
+
 /// Thrown when a user tries to sign in a to a provider (such as Google) with an email that already exists
 /// for another Firebase user's provider (such as Facebook).
 ///

@@ -23,6 +23,9 @@ abstract class FieldObject<T> {
   Either<FieldObjectException<dynamic>, Unit> get mapped =>
       value.fold((f) => left(f), (r) => right(unit));
 
+  FieldObjectException<dynamic>? get failure =>
+      value.fold((l) => l, (_) => null);
+
   bool get isValid => value.isRight();
 
   T get getOrCrash => value.fold((failure) {

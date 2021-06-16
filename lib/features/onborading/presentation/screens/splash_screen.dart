@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviable_app/features/auth/presentation/managers/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +18,29 @@ class SplashScreen extends StatelessWidget with AutoRouteWrapper {
       create: (_) => getIt<OnboardingCubit>()..delaySplash(),
       child: BlocListener<OnboardingCubit, OnboardingState>(
         listenWhen: (p, c) => p.isLoading != c.isLoading,
-        listener: (context, state) {
-          // if (state.isLoading == false)
-          //   navigator.pushAndPopUntil(
-          //     OnboardingRoute(),
-          //     predicate: (_) => false,
-          //   );
+        listener: (c, s) {
+          var cubit = BlocProvider.of<AuthWatcherCubit>(App.context);
+
+          if (!cubit.state.listenerAttached) {
+            cubit.listenToAuthChanges(
+              (option) => option.fold(
+                () {
+                  if (s.isLoading == false)
+                    navigator.pushAndPopUntil(
+                      SignupRoute(),
+                      predicate: (_) => false,
+                    );
+                },
+                (user) {
+                  if (s.isLoading == false)
+                    navigator.pushAndPopUntil(
+                      HomeRoute(),
+                      predicate: (_) => false,
+                    );
+                },
+              ),
+            );
+          }
         },
         child: this,
       ),
@@ -43,6 +61,7 @@ class SplashScreen extends StatelessWidget with AutoRouteWrapper {
               alignment: Alignment.center,
               child: Image(
                 image: AssetImage('${AppAssets.logo}'),
+                height: App.height * 0.15,
                 fit: BoxFit.contain,
               ),
             ),
