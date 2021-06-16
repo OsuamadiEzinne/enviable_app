@@ -41,10 +41,14 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
-      listener: (c, s) {
+      listenWhen: (p, c) =>
+          c.verification != null &&
+          (p.verification?.codeSent != c.verification?.codeSent),
+      listener: (c, s) async {
         if (s.verification != null) if (s.verification!.codeSent) {
           var val = s.verification!;
 
+          // ignore: unawaited_futures
           BottomAlertDialog.show(
             c,
             duration: const Duration(seconds: AuthFacade.TIMEOUT_SEC),
@@ -55,8 +59,17 @@ class _SignupScreenState extends State<SignupScreen> {
             shouldIconPulse: false,
           );
 
-          navigator.push(
-            OtpConfirmationRoute(verification: s.verification!),
+          await Future.delayed(
+            Duration(seconds: 2),
+            () async {
+              var reset = await navigator.push(
+                OtpConfirmationRoute(verification: s.verification!),
+              );
+
+              if (reset != null && reset == true) {
+                c.read<AuthCubit>().reset();
+              }
+            },
           );
         }
       },
@@ -165,33 +178,37 @@ class _SignupScreenState extends State<SignupScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      AutoSizeText(
-                        'By continuing you may recieve an SMS for verification. '
-                        'Message and data rates may apply',
-                        style: Theme.of(context).textTheme.caption,
+                      Flexible(
+                        child: AutoSizeText(
+                          'By continuing you may recieve an SMS for verification. '
+                          'Message and data rates may apply',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
                       ),
                       //
                       VerticalSpace(height: App.shortest * 0.04),
                       //
-                      BlocBuilder<AuthCubit, AuthState>(
-                        builder: (c, s) => Visibility(
-                          visible: !s.isLoading,
-                          replacement: Center(
-                            child: CircularProgressBar.adaptive(
-                              width: App.width * 0.08,
-                              height: App.width * 0.08,
-                              strokeWidth: 3.5,
-                              radius: 14,
+                      Flexible(
+                        child: BlocBuilder<AuthCubit, AuthState>(
+                          builder: (c, s) => Visibility(
+                            visible: !s.isLoading,
+                            replacement: Center(
+                              child: CircularProgressBar.adaptive(
+                                width: App.width * 0.08,
+                                height: App.width * 0.08,
+                                strokeWidth: 3.5,
+                                radius: 14,
+                              ),
                             ),
-                          ),
-                          child: AppButton(
-                            height: 38,
-                            textColor: Theme.of(context).platform.fold(
-                                  material: () => Colors.white,
-                                  cupertino: () => null,
-                                ),
-                            onPressed: c.read<AuthCubit>().loginWithPhone,
-                            text: 'Next',
+                            child: AppButton(
+                              height: 38,
+                              textColor: Theme.of(context).platform.fold(
+                                    material: () => Colors.white,
+                                    cupertino: () => null,
+                                  ),
+                              onPressed: c.read<AuthCubit>().loginWithPhone,
+                              text: 'Next',
+                            ),
                           ),
                         ),
                       ),

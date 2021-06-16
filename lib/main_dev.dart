@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,13 +13,6 @@ void main() async {
 
   // Setup Environmental variables & Service provider
   await BuildEnvironment.init(flavor: BuildFlavor.dev);
-
-  // // Add Google Fonts Licensing
-  // LicenseRegistry.addLicense(() async* {
-  //   final license =
-  //       await rootBundle.loadString('assets/fonts/google_fonts/OFL.txt');
-  //   yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  // });
 
   try {
     // Initializes Hive with a valid directory in your app files.
@@ -37,6 +31,14 @@ void main() async {
   }
 
   runApp(DevicePreview(
+    enabled: env.flavor.fold(
+      prod: () => !kReleaseMode,
+      dev: () => true,
+    )!,
+    style: DevicePreviewStyle(
+      background: BoxDecoration(color: Colors.transparent),
+      toolBar: DevicePreviewToolBarStyle.light(),
+    ),
     builder: (context) => const EnviableApp(),
   ));
 }

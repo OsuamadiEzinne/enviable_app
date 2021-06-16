@@ -47,8 +47,7 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
-        checkReleaseBuilds false // Add this
-        // abortOnError false
+        checkReleaseBuilds false
     }
 
     compileOptions {
@@ -82,7 +81,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -94,11 +97,9 @@ android {
             dimension "app"
             versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
-            signingConfig signingConfigs.debug
         }
         prod {
             dimension "app"
-            signingConfig signingConfigs.release
         }
     }
 }

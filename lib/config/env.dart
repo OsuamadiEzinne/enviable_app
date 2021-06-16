@@ -57,21 +57,27 @@ class BuildEnvironment implements Secrets {
       DeviceOrientation.portraitDown,
     ]);
 
-    switch (flavor) {
+    await flavor?.fold(dev: () async {
+      await locator(Environment.dev);
+      await getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(false);
+    }, prod: () async {
+      await locator(Environment.prod);
+      await getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
+    });
+  }
+}
+
+extension BuildFlavorX on BuildFlavor {
+  T? fold<T>({
+    T? Function()? dev,
+    T? Function()? prod,
+  }) {
+    switch (this) {
       case BuildFlavor.dev:
-        await locator(Environment.dev);
-        await getIt<FirebaseCrashlytics>()
-            .setCrashlyticsCollectionEnabled(false);
-        break;
+        return dev?.call();
       case BuildFlavor.prod:
-        await locator(Environment.prod);
-        await getIt<FirebaseCrashlytics>()
-            .setCrashlyticsCollectionEnabled(true);
-        break;
       default:
-        await locator(Environment.prod);
-        await getIt<FirebaseCrashlytics>()
-            .setCrashlyticsCollectionEnabled(true);
+        return prod?.call();
     }
   }
 }

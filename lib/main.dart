@@ -44,6 +44,14 @@ void main() async {
   }
 
   runApp(DevicePreview(
+    enabled: env.flavor.fold(
+      prod: () => !kReleaseMode,
+      dev: () => true,
+    )!,
+    style: DevicePreviewStyle(
+      background: BoxDecoration(color: Colors.transparent),
+      toolBar: DevicePreviewToolBarStyle.light(),
+    ),
     builder: (context) => const EnviableApp(),
   ));
 }

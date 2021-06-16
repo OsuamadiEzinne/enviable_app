@@ -89,6 +89,7 @@ mixin FirebaseAuthMixin {
               "\nDidn't get the code? Tap Resend.",
         ));
       default:
+        log.e(e);
         return left(AuthFailure.unknownFailure(
           message: (e is Exception || e is Error) ? e.message : null,
         ));

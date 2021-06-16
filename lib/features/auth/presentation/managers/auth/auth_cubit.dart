@@ -40,6 +40,8 @@ class AuthCubit extends Cubit<AuthState> {
         authStatus: none(),
       ));
 
+  void reset() => emit(state.copyWith(verification: null));
+
   void codeChanged(String code) => emit(state.copyWith(
         code: OTPCode(code),
         authStatus: none(),

@@ -74,8 +74,6 @@ class OtpConfirmationScreen extends StatefulWidget with AutoRouteWrapper {
 class _OtpConfirmationScreenState extends State<OtpConfirmationScreen> {
   Duration duration = Duration(seconds: AuthFacade.TIMEOUT_SEC);
   Timer? timer;
-  TapGestureRecognizer wrongNumberRecognizer = TapGestureRecognizer()
-    ..onTap = () => navigator.pop();
 
   String get tick => '${duration.inMinutes}:'
       '${((duration.inSeconds) % 60).toString().padLeft(2, '0')}';
@@ -118,6 +116,8 @@ class _OtpConfirmationScreenState extends State<OtpConfirmationScreen> {
       },
       child: Scaffold(
         appBar: Toolbar(
+          leadingCondition: false,
+          leadingAction: () => navigator.pop(true),
           title: 'Verify '
               '${widget.verification?.phone.country.dialCode}'
               '${'${widget.verification?.phone.getOrEmpty}'.formatNumber(div: 3, count: 7)}',
@@ -142,16 +142,6 @@ class _OtpConfirmationScreenState extends State<OtpConfirmationScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(text: '.'),
-                    TextSpan(text: '\n'),
-                    TextSpan(
-                      text: '\nWrong number?',
-                      recognizer: wrongNumberRecognizer,
-                      style: TextStyle(
-                        color: AppColors.accentColor,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                   ]),
                   textAlign: TextAlign.center,
                   maxLines: 4,
@@ -159,6 +149,23 @@ class _OtpConfirmationScreenState extends State<OtpConfirmationScreen> {
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontSize: 16.0,
                       ),
+                ),
+              ),
+            ),
+            //
+            VerticalSpace(height: App.shortest * 0.07),
+            //
+            GestureDetector(
+              onTap: () => navigator.pop(true),
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 8.0),
+                child: AutoSizeText(
+                  'Wrong number?',
+                  style: TextStyle(
+                    color: AppColors.accentColor,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),

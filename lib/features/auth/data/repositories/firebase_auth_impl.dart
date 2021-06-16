@@ -96,13 +96,12 @@ class FirebaseAuthImpl implements AuthFacade {
         timeout: timeout,
         // called only when the verification is successfully
         // completed automatically using Auto Retrieval
-        // Call _auth.signInWithCredential()
         verificationCompleted: verificationCompleted,
         // Called when verification failed and the user is not logged in
         verificationFailed: (FirebaseAuthException ex) async {
-          var parsed = await FirebaseAuthMixin.handleAuthException(ex);
+          var transformed = await FirebaseAuthMixin.handleAuthException(ex);
 
-          parsed.fold(
+          transformed.fold(
             (f) => verificationFailed.call(f),
             (_) => null,
           );
@@ -189,8 +188,10 @@ class FirebaseAuthImpl implements AuthFacade {
     } on AuthFailure catch (e) {
       return left(e);
     } on FirebaseAuthException catch (e) {
+      log.e(e);
       return FirebaseAuthMixin.handleAuthException(e);
     } catch (e) {
+      log.e(e);
       return left(AuthFailure.unknownFailure(
         message: (e is Exception || e is Error) ? '$e' : null,
       ));
@@ -233,8 +234,6 @@ class FirebaseAuthImpl implements AuthFacade {
       // First we'll check for stable Internet connection
       await _checkForStableInternet();
 
-      log.wtf(old);
-
       // This is for a normal Sign-in with credential
       // Accept the old creds and attempt to sign the user in
       if (old != null && incoming == null)
@@ -252,8 +251,8 @@ class FirebaseAuthImpl implements AuthFacade {
       }
 
       throw AuthFailure.invalidCredentials(
-        message:
-            'Credentials are invalid. Please try again or contact support.',
+        message: 'Credentials are invalid. '
+            'Please try again or contact support.',
       );
     } on AuthFailure catch (e) {
       return left(e);
@@ -270,6 +269,12 @@ class FirebaseAuthImpl implements AuthFacade {
   }
 
   @override
+  Future<void> signOut() => Future.wait([
+        _firebaseAuth.signOut(),
+        _googleSignIn.signOut(),
+      ]);
+
+  @override
   Future<Either<AuthFailure, Unit>> twitterAuthentication([
     AuthCredential? pendingCredentials,
   ]) async =>
@@ -277,12 +282,6 @@ class FirebaseAuthImpl implements AuthFacade {
         'Twitter '
         'Authentication Feature not Implemented.\nPlease contact support.',
       );
-
-  @override
-  Future<void> signOut() => Future.wait([
-        _firebaseAuth.signOut(),
-        _googleSignIn.signOut(),
-      ]);
 
   @override
   Future<Either<AuthFailure, Unit>> facebookAuthentication([
