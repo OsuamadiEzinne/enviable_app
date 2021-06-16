@@ -14,9 +14,11 @@ on:
   push:
     branches:
       - dev
+      - brendan
   pull_request:
     branches:
       - dev
+      - brendan
     types:
       - opened
       - reopened
