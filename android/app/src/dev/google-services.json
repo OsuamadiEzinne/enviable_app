@@ -1,21 +1,20 @@
 {
   "project_info": {
-    "project_number": "167556416758",
-    "firebase_url": "https://enviable-802b0-default-rtdb.firebaseio.com",
-    "project_id": "enviable-802b0",
-    "storage_bucket": "enviable-802b0.appspot.com"
+    "project_number": "639433666985",
+    "project_id": "enviable-project",
+    "storage_bucket": "enviable-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:167556416758:android:d7c192947221806b1458d7",
+        "mobilesdk_app_id": "1:639433666985:android:5c27962db73f934b5d94b8",
         "android_client_info": {
           "package_name": "osuamadiezinne.enviable_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "167556416758-5bojjsfuorl9spj8ccqh5hhjdacqtl3o.apps.googleusercontent.com",
+          "client_id": "639433666985-koj34jju17m2flgks7mhk2g6cpc5rn4e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "osuamadiezinne.enviable_app",
@@ -23,28 +22,21 @@
           }
         },
         {
-          "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+          "client_id": "639433666985-0kfklna1ld2mhc2pslj3ogg45ncdkoj4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSZ_jizdi7pVvnIeEO5sfGQ5P26HFu99E"
+          "current_key": "AIzaSyCl2p9jWXFn58tiN2AABzGv63ddL_BAjX8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+              "client_id": "639433666985-0kfklna1ld2mhc2pslj3ogg45ncdkoj4.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "167556416758-1er5glj17lcpfc5krvvo27mvsr5lavki.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "osuamadiezinne.enviableApp"
-              }
             }
           ]
         }
@@ -52,14 +44,14 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:167556416758:android:53589931ec5bf5341458d7",
+        "mobilesdk_app_id": "1:639433666985:android:56ef0449fa8bdf0f5d94b8",
         "android_client_info": {
           "package_name": "osuamadiezinne.enviable_app.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "167556416758-s5hsf7ckmae2no28o4942he8l6ulrn2f.apps.googleusercontent.com",
+          "client_id": "639433666985-3t2v5vlo7vk7kh7s3avls5a8tpdpv568.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "osuamadiezinne.enviable_app.dev",
@@ -67,28 +59,21 @@
           }
         },
         {
-          "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+          "client_id": "639433666985-0kfklna1ld2mhc2pslj3ogg45ncdkoj4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSZ_jizdi7pVvnIeEO5sfGQ5P26HFu99E"
+          "current_key": "AIzaSyCl2p9jWXFn58tiN2AABzGv63ddL_BAjX8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "167556416758-mh4up2l74omc30l6lsu931lo7ctf6dgc.apps.googleusercontent.com",
+              "client_id": "639433666985-0kfklna1ld2mhc2pslj3ogg45ncdkoj4.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "167556416758-1er5glj17lcpfc5krvvo27mvsr5lavki.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "osuamadiezinne.enviableApp"
-              }
             }
           ]
         }

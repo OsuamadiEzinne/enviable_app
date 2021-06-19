@@ -42,7 +42,7 @@ dependencies:
   # Customize App font
   google_fonts: ^2.1.0
   # A Flutter plugin that provides a Google Maps widget.
-  # google_maps_flutter: ^2.0.6
+  google_maps_flutter: ^2.0.6
   # This plugin allows Flutter apps to discover network connectivity
   # and configure themselves accordingly.
   connectivity: ^3.0.6

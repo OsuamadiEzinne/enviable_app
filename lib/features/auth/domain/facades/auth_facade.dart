@@ -37,7 +37,7 @@ abstract class AuthFacade with FirebaseAuthMixin {
     AuthCredential? pendingCredentials,
   ]);
 
-  Future<Either<AuthFailure, Unit>> twitterAuthentication([
+  Future<Either<AuthFailure, Unit>> appleAuthentication([
     AuthCredential? pendingCredentials,
   ]);
 

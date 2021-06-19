@@ -98,7 +98,7 @@ class FirebaseAuthImpl implements AuthFacade {
         // completed automatically using Auto Retrieval
         verificationCompleted: verificationCompleted,
         // Called when verification failed and the user is not logged in
-        verificationFailed: (FirebaseAuthException ex) async {
+        verificationFailed: (ex) async {
           var transformed = await FirebaseAuthMixin.handleAuthException(ex);
 
           transformed.fold(
@@ -275,13 +275,14 @@ class FirebaseAuthImpl implements AuthFacade {
       ]);
 
   @override
-  Future<Either<AuthFailure, Unit>> twitterAuthentication([
+  Future<Either<AuthFailure, Unit>> appleAuthentication([
     AuthCredential? pendingCredentials,
-  ]) async =>
-      throw UnimplementedError(
-        'Twitter '
-        'Authentication Feature not Implemented.\nPlease contact support.',
-      );
+  ]) async {
+    throw UnimplementedError(
+      'Twitter '
+      'Authentication Feature not Implemented.\nPlease contact support.',
+    );
+  }
 
   @override
   Future<Either<AuthFailure, Unit>> facebookAuthentication([
